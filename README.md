@@ -14,11 +14,11 @@ Experiment had been done on LC-QuAD, which have 5000 complex question and 1990 h
 |Hit@2| 0.743849|
     
 ## Notice that 
-the input of this program is a EDG structure, which is what our EDG team working with.
+The input of this program is a EDG structure, which is what our EDG team working with.
 
 In the main function we give an example of EDG, input this and output the linking result.
 
 ## Future work
-This work can only recieve EDG as input, we will make a question as input version
+This work can only recieve EDG as input, we will make a version that recieve question as input.
 
-Another work is to expend search space to the whole DBpedia, which has around 800 class(LC-QuAD has 187 class)
+Another work is to expend search space to the whole DBpedia, which has around 800 class(LC-QuAD has 187 class).
