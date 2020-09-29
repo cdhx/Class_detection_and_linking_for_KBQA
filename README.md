@@ -4,12 +4,14 @@ A class linking tool for KBQA system, detect and linking class(type) to DBpedia 
 ## Performance
 Experiment had been done on LC-QuAD, which have 5000 complex question and 1990 has a type relation(aka. rdf:type)
 
-Linking performance:
-    Precision: 0.519971	
-    Recall: 0.76411	
-    F1-score: 0.580222	
-    Hit@1: 0.691027	
-    Hit@2: 0.743849
+**Linking performance:**
+|Metrics|Performance|
+| ------------- | ------------- |
+|Precision: 0.519971|	
+|Recall| 0.76411|	
+|F1-score| 0.580222|	
+|Hit@1| 0.691027|	
+|Hit@2| 0.743849|
     
 ## Notice that 
 the input of this program is a EDG structure, which is what our EDG team working with.
