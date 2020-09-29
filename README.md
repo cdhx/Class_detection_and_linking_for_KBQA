@@ -7,7 +7,7 @@ Experiment had been done on LC-QuAD, which have 5000 complex question and 1990 h
 **Linking performance:**
 |Metrics|Performance|
 | ------------- | ------------- |
-|Precision: 0.519971|	
+|Precision| 0.519971|	
 |Recall| 0.76411|	
 |F1-score| 0.580222|	
 |Hit@1| 0.691027|	
