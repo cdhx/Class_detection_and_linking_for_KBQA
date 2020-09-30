@@ -18,6 +18,12 @@ The input of this program is a EDG structure, which is what our EDG team working
 
 In the main function we give an example of EDG, input this and output the linking result.
 
+2020.9.30 update
+
+CL() function  receive a string as input
+
+CL_edg() function receive EDG as input
+
 ## Future work
 This work can only recieve EDG as input, we will make a version that recieve question as input.
 

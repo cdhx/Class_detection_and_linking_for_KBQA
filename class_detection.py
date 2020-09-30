@@ -115,8 +115,8 @@ def NVP_match_result_merge(all_NVP_match_result):
     return result
         
         
-def main(edg,max_cand_num=5):
-    '''主函数，对任意edg进行class链接'''
+def CL_edg(edg,max_cand_num=5):
+    '''输入一个edg'结构，可以处理edg中多个NVP的情况'''
 
     #获取一个问句所有NVP
     NVP=[]
@@ -146,112 +146,26 @@ def main(edg,max_cand_num=5):
     nomatch_static=df_nomatch.loc[:,'class_link'].value_counts()
     return df_nomatch
 
-if __name__ == '__main__':
-    
-    file = open('content_link_map.txt', 'r') 
+def CL(NVP, max_cand_num=5):
+    '''输入一个NVP字符串，输出链接结果'''
+    '''主函数，对任意edg进行class链接'''
+    file = open('content_link_map.txt', 'r')
     js = file.read()
-    content_link_map = json.loads(js) 
+    content_link_map = json.loads(js)
     file.close()
-    
-    file = open('type_split_lower.txt', 'r') 
+
+    file = open('type_split_lower.txt', 'r')
     type_split_lower = eval(file.read())
     file.close()
-    
-    edg={'taggedQuestion': 'Which sects people are part of <e1> which fall under the International <e0>?',
- 'entityMap': {'<e2>': 'International  e0',
-  '<e1>': 'local political parties',
-  '<e0>': 'Muslim Brotherhood'},
- 'nodeNum': 7,
- 'nodes': [{'containsRefer': False,
-   'start': -1,
-   'entityID': -1,
-   'end': -1,
-   'trigger': 'which',
-   'nodeType': 1,
-   'nodeID': 0,
-   'questionType': 4},
-  {'containsRefer': False,
-   'start': -1,
-   'entityID': 0,
-   'end': -1,
-   'nodeType': 2,
-   'nodeID': 1,
-   'questionType': 0},
-  {'str': ' sects people',
-   'containsRefer': False,
-   'start': 1,
-   'entityID': 0,
-   'end': 3,
-   'nodeType': 4,
-   'nodeID': 2,
-   'questionType': 0},
-  {'str': 'are part of #entity1',
-   'containsRefer': True,
-   'start': 3,
-   'entityID': 0,
-   'end': 13,
-   'nodeType': 3,
-   'nodeID': 3,
-   'questionType': 0},
-  {'containsRefer': False,
-   'start': -1,
-   'entityID': 1,
-   'end': -1,
-   'nodeType': 2,
-   'nodeID': 4,
-   'questionType': 0},
-  {'str': 'local political parties',
-   'containsRefer': False,
-   'start': 6,
-   'entityID': 1,
-   'end': 7,
-   'nodeType': 4,
-   'nodeID': 5,
-   'questionType': 0},
-  {'str': 'fall under the International Muslim Brotherhood',
-   'containsRefer': False,
-   'start': 8,
-   'entityID': 1,
-   'end': 13,
-   'nodeType': 3,
-   'nodeID': 6,
-   'questionType': 0}],
- 'question': 'Which sects people are part of local political parties which fall under the International Muslim Brotherhood?',
- 'entityNum': 2,
- 'edges': [{'edgeType': 1,
-   'isEqual': False,
-   'start': -1,
-   'from': 0,
-   'end': -1,
-   'to': 1},
-  {'edgeType': 4,
-   'isEqual': False,
-   'start': -1,
-   'from': 1,
-   'end': -1,
-   'to': 2},
-  {'edgeType': 3,
-   'isEqual': False,
-   'start': -1,
-   'from': 1,
-   'end': -1,
-   'to': 3},
-  {'edgeType': 2, 'isEqual': False, 'start': 6, 'from': 3, 'end': 13, 'to': 4},
-  {'edgeType': 4,
-   'isEqual': False,
-   'start': -1,
-   'from': 4,
-   'end': -1,
-   'to': 5},
-  {'edgeType': 3,
-   'isEqual': False,
-   'start': -1,
-   'from': 4,
-   'end': -1,
-   'to': 6}],
- 'sparql_query': 'SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/international> <http://dbpedia.org/resource/Muslim_Brotherhood> . ?x <http://dbpedia.org/ontology/religion> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/PoliticalParty>}',
- 'syntaxTreeText': '(ROOT (SBARQ (WHNP (WDT Which) (NP (NP (NNS sects)) (NP (NNS people)))) (SQ (VBP are) (NP (NP (NN part)) (PP (IN of) (NP (NP (NN <e1>)) (SBAR (WHNP (WDT which)) (S (VP (VBP fall) (PP (IN under) (NP (DT the) (NNP International) (NN <e0>)))))))))) (. ?)))',
- 'qid': '3293'}
+
+    match_result = relax_single_word_match_score(NVP, type_split_lower)# 首先计算所有NVP的匹配结果，用_x避免混淆
+    match_result = NVP_match_result_merge(match_result)  # 获取合并重排序的结果和分数
+    match_result = list(map(lambda x: x[0], match_result))[:max_cand_num]  # 获取匹配结果，不要分数
+    result = list(map(lambda x: content_link_map[x], match_result))
+    return result
+
+
+if __name__ == '__main__':
 
     max_cand_num=5#最多返回多少个候选    
-    print('Linking result:',main(edg,max_cand_num))
+    print('Linking result:',CL('school is good'))
