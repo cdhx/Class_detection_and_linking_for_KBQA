@@ -7,12 +7,12 @@ Experiment had been done on LC-QuAD, which have 5000 complex question and 1990 h
 **Linking performance:**
 |Metrics|Performance|
 | ------------- | ------------- |
-|Precision| 0.519971|	
-|Recall| 0.76411|	
-|F1-score| 0.580222|	
-|Hit@1| 0.691027|	
-|Hit@2| 0.743849|
-    
+|Precision| 0.536284|	
+|Recall| 0.7822|	
+|F1-score| 0.595965|	
+|Hit@1| 0.685962|	
+|Hit@2| 0.762663|
+    	
 ## Notice that 
 The input of this program is a EDG structure, which is what our EDG team working with.
 
