@@ -127,16 +127,9 @@ def NVP_match_result_merge(all_NVP_match_result):
     return result
         
         
-def CL_edg(edg,max_cand_num=5):
+def main(edg,max_cand_num=5):
     '''主函数，对任意edg进行class链接'''
-    file = open('content_link_map.txt', 'r')
-    js = file.read()
-    content_link_map = json.loads(js)
-    file.close()
 
-    file = open('type_split_lower.txt', 'r')
-    type_split_lower = eval(file.read())
-    file.close()
     #获取一个问句所有NVP
     NVP=[]
     nodes=edg['nodes']
@@ -178,3 +171,8 @@ def CL(NVP, max_cand_num=5):
     result = list(map(lambda x: content_link_map[x], match_result))
     return result
 
+
+if __name__ == '__main__':
+
+    max_cand_num=5#最多返回多少个候选
+    print('Linking result:',CL('school is good'))
