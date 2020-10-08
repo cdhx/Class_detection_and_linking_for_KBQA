@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 
-@app.route('/class_linking/', methods=['POST'])
+@app.route('/class_linking', methods=['POST'])
 def cl_func():
 
     if request.method == 'POST':

@@ -24,7 +24,7 @@ def relax_single_word_match_score(s1,type_split_lower):
                 s2i.replace('-','').strip()
                 #方案一，匹配不上再做还原
                 if s2i==s1i:
-                    if s2i_lemma in stop_word_list:
+                    if s2i in stop_word_list:
                         have_stop_word_match += 1
                     else:
                         match_num += 1
